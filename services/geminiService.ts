@@ -1,7 +1,7 @@
 import { Section, Alpha, ReplicationResults } from '../types';
 
-// Mock service for Gemini API interactions.
-// In a real app, you'd replace these with actual calls to the @google/genai library.
+// --- MOCK GEMINI SERVICE ---
+// In a real app, this would be wired up to @google/genai
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -73,19 +73,12 @@ export const generateAlphaStrategies = async (): Promise<Alpha[]> => {
 };
 
 export const simulateReplicationResults = async (): Promise<ReplicationResults> => {
-    await delay(1000);
-    return {
-        "portfolio_pnl": {
-            "sandbox_pnl": 572.30,
-            "backtest_pnl": 572.30,
-            "pnl_match": "PASS"
-        },
-        "alphas": {
-            "alpha_1_pairs": { "trades": 15, "pnl": 102.50, "match": "PASS", "analysis": "Perfect match. Event timing and fill prices were identical." },
-            "alpha_2_breakout": { "trades": 8, "pnl": -30.10, "match": "PASS", "analysis": "Perfect match." },
-            "alpha_3_mtf": { "trades": 12, "pnl": 210.40, "match": "PASS", "analysis": "Perfect match." },
-            "alpha_4_multi_asset": { "trades": 3, "pnl": 301.00, "match": "PASS", "analysis": "Perfect match." },
-            "alpha_5_orderbook": { "trades": 55, "pnl": -11.50, "match": "FAIL", "analysis": "Mismatch in 2 trades due to L2 book update latency difference between sandbox and backtest simulation. The replay log had a 5ms delayed tick, causing a signal to fire one event later." }
-        }
-    };
+    // Simulate network latency before fetching the static results log.
+    await delay(1000); 
+    const response = await fetch('results.json');
+    if (!response.ok) {
+        console.error("Failed to fetch results.json. Make sure the file exists at the root.");
+        throw new Error('Failed to load replication results log.');
+    }
+    return response.json();
 };
