@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Section } from '../types';
 import { ChartBarIcon, CodeBracketIcon, DocumentTextIcon, ScaleIcon, CheckCircleIcon, CubeTransparentIcon } from './icons';
@@ -14,6 +13,7 @@ const navItems = [
   { section: Section.ALPHA_LIBRARY, icon: <CodeBracketIcon /> },
   { section: Section.RIGOROUS_TESTING, icon: <ChartBarIcon /> },
   { section: Section.REPLICATION_TEST, icon: <CheckCircleIcon /> },
+  { section: Section.FINAL_REPORT, icon: <DocumentTextIcon /> },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {

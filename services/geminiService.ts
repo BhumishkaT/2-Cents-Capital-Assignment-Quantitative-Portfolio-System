@@ -1,8 +1,7 @@
-
 import { Section, Alpha, ReplicationResults } from '../types';
 
-// This file simulates calls to the Gemini API.
-// In a real application, you would use the @google/genai library here.
+// Mock service for Gemini API interactions.
+// In a real app, you'd replace these with actual calls to the @google/genai library.
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -27,11 +26,19 @@ const explanations: Record<Section, string> = {
 2.  **Live Logging:** For a set period (e.g., one week), the system runs live, logging every single market data tick, order, and fill with precise timestamps.
 3.  **Replay Backtest:** The system's backtester is run in a special "replay" mode. Instead of using historical database queries, it is fed the exact, raw, timestamped market data stream that was logged during the sandbox run.
 4.  **The "Must-Match" Requirement:** The trade log, final P&L, and equity curve from this replay backtest must perfectly match the results from the sandbox run. Any discrepancy, no matter how small, indicates a flaw in the system (e.g., look-ahead bias, incorrect latency handling, or non-deterministic logic) and must be investigated.`,
+  [Section.FINAL_REPORT]: `The final submission is a professional, 15-20 page PDF report that consolidates all your work. It's not just about presenting results, but demonstrating the rigor of your process. It must include:
+<br/><br/>
+1.  **System Architecture:** A clear, detailed diagram of your system (e.g., using UML or a similar standard). This diagram must visually explain the flow of data and events between components like the Broker Connectivity Layer, Data Handler, Event Core, Portfolio Manager, and Execution Handler. Special attention should be given to how the multi-source data handler synchronizes data from different assets and timeframes.
+<br/><br/>
+2.  **Alpha Library:** A complete mathematical and logical description of each of your five alphas. For each alpha, you must specify the exact formulas used (e.g., z-score calculation), the parameters (lookback periods, thresholds), the entry/exit conditions, and the risk management rules (stop-loss, take-profit).
+<br/><br/>
+3.  **Backtest Results:** This section presents the empirical evidence for your portfolio's performance. It must include the Walk-Forward Optimization (WFO) equity curves (In-Sample vs. Out-of-Sample) for the entire portfolio. You must also include the alpha correlation matrix to prove that your strategies are diversified and not redundant.
+<br/><br/>
+4.  **The Replication Analysis:** This is the most critical section. You must present your \`results.json\` file and provide a detailed discussion. If all tests passed, explain why you believe your architecture succeeded. If any test failed (like the example 'alpha_5_orderbook'), you must conduct a deep root-cause analysis. This analysis is mandatory and demonstrates a higher level of understanding than a perfect result with no explanation. Pinpoint the exact cause of the mismatch (e.g., latency, data tick differences, order queue position) and propose a solution.`,
   [Section.ALPHA_LIBRARY]: '' // This is handled by generateAlphaStrategies
 };
 
 export const getSectionExplanation = async (section: Section): Promise<string> => {
-  console.log(`Simulating Gemini API call for section: ${section}`);
   await delay(500);
   if (explanations[section]) {
     return explanations[section];
@@ -40,7 +47,6 @@ export const getSectionExplanation = async (section: Section): Promise<string> =
 };
 
 export const generateAlphaStrategies = async (): Promise<Alpha[]> => {
-  console.log('Simulating Gemini API call to generate alpha strategies...');
   await delay(800);
   return [
     {
@@ -67,7 +73,6 @@ export const generateAlphaStrategies = async (): Promise<Alpha[]> => {
 };
 
 export const simulateReplicationResults = async (): Promise<ReplicationResults> => {
-    console.log('Simulating Gemini API call for replication results...');
     await delay(1000);
     return {
         "portfolio_pnl": {

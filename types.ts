@@ -1,10 +1,10 @@
-
 export enum Section {
   OBJECTIVE = 'Objective',
   SYSTEM_ARCHITECTURE = 'System Architecture',
   ALPHA_LIBRARY = 'Alpha Library',
   RIGOROUS_TESTING = 'Rigorous Testing',
   REPLICATION_TEST = 'Deployment & Replication Test',
+  FINAL_REPORT = 'Final Report',
 }
 
 export interface Alpha {

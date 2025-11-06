@@ -52,7 +52,6 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              {/* Fix: Cast the result of Object.entries to the correct type to resolve TS errors. */}
               {(Object.entries(alphas) as [string, AlphaResult][]).map(([name, result]) => (
                 <tr key={name} className="hover:bg-gray-700/30">
                   <td className="p-4 font-mono text-cyan-400">{name}</td>

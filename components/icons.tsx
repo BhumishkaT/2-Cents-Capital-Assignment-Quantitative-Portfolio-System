@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-// Using React.SVGProps<SVGSVGElement> for better type safety with SVG attributes
+// Helper to create typed SVG icons
 const createIcon = (path: React.ReactNode) => (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
